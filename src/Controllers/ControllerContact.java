@@ -26,7 +26,7 @@ public class ControllerContact {
 
     public void viewContacts() {
         IDataModel contactDao = new ContactDaoImplement();
-        List<Contact> listContact = ((ContactDaoImplement) contactDao).getModelData();
+        List<Contact> listContact = ((ContactDaoImplement) contactDao).getListModelData();
         viewContact.renderViewContact(listContact);
     }
 }

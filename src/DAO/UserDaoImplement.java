@@ -65,6 +65,7 @@ public class UserDaoImplement implements IDataModel<User> {
         return correctBehavior;
     }
 
+    @Override
     public User getModelData(User user) {
         sqlQuery = "select * from Users where id = " + user.getId();
         ResultSet resultQuery;

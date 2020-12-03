@@ -25,7 +25,7 @@ public class ControllerUser {
 
     public void viewUser(User currentUser) {
         IDataModel userDao = new UserDaoImplement();
-        User user = ((UserDaoImplement) userDao).getModelData(currentUser);
+        User user = (User)userDao.getModelData(currentUser);
         viewUser.renderViewUser(user);
     }
 }

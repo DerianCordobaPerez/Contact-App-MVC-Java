@@ -70,7 +70,33 @@ public class ContactDaoImplement implements IDataModel<Contact> {
         return correctBehavior;
     }
 
-    public List<Contact> getModelData() {
+    @Override
+    public Contact getModelData(Contact contact) {
+        sqlQuery = "select * from contacts where id = " + contact.getId();
+        ResultSet resultQuery;
+        Contact newContact = null;
+        try {
+            connection = ConnectionDatabase.ConnectDatabase();
+            statementQuery = connection.createStatement();
+            resultQuery = statementQuery.executeQuery(sqlQuery);
+            while(resultQuery.next()) {
+                newContact = new Contact();
+                newContact.setId(resultQuery.getInt(1));
+                newContact.setName(resultQuery.getString(2));
+                newContact.setPhone(resultQuery.getString(3));
+                newContact.setOperator(resultQuery.getString(4));
+            }
+            statementQuery.close();
+            resultQuery.close();
+            connection.close();
+        } catch(SQLException exception) {
+            System.out.println("An error occurred while trying to get contact");
+            exception.printStackTrace();
+        }
+        return newContact;
+    }
+
+    public List<Contact> getListModelData() {
         sqlQuery = "select * from contacts order by id desc";
         ResultSet resultQuery;
         List<Contact> listContact = new ArrayList<>();

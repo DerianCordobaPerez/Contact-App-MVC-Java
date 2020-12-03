@@ -1,7 +1,8 @@
 package Interfaces;
 
 public interface IDataModel<T> {
-    public boolean recordModelData(T modelReference);
-    public boolean updateModelData(T modelReference);
-    public boolean deleteModelData(T modelReference);
+    boolean recordModelData(T modelReference);
+    boolean updateModelData(T modelReference);
+    boolean deleteModelData(T modelReference);
+    T getModelData(T modelreference);
 }
