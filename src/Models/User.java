@@ -2,7 +2,7 @@ package Models;
 
 public class User {
     private int id;
-    private String identification, firstName, lastName, userName;
+    private String identification, firstName, lastName, userName, password;
 
     public User() {}
 
@@ -28,5 +28,8 @@ public class User {
 
     public String getUserName() { return this.userName; }
     public void setUserName(String userName) { this.userName = userName; }
+
+    public String getPassword() { return this.password; }
+    public void setPassword(String password) { this.password = password; }
 
 }
