@@ -29,8 +29,8 @@ public class ControllerUser {
 
     public void viewUser(User currentUser) {
         IDataModel<User> userDao = new UserDaoImplement();
-        User user = userDao.getModelData(currentUser);
-        if(user == null) {
+        User user;
+        if((user = userDao.getModelData(currentUser)) == null) {
             new Error().generatedError("The searched user has not been found in the database");
             return;
         }
