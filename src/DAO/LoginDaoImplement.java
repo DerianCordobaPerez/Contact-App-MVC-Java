@@ -14,7 +14,7 @@ public class LoginDaoImplement implements IDataLogin {
     private String sqlQuery = "";
     @Override
     public User verifyUserLogin(String userName, String userPassword) {
-        sqlQuery = "select * from Users where username = '" + userName + "' and password = '" + userPassword + "'";
+        sqlQuery = "select * from Users where userName = '" + userName + "' and userPassword = '" + userPassword + "'";
         ResultSet resultQuery;
         User userLoggedIn = null;
         try {
