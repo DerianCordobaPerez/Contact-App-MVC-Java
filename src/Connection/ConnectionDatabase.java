@@ -1,19 +1,20 @@
 package Connection;
+import Views.Components.Error;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDatabase {
     public static Connection ConnectDatabase() {
-        String User = "root", Password = "derian2020";
-        String Url = "dbc:mysql://localhost:3306/Contact_App?user=" + User
-                + "&password=" + Password;
         Connection connection = null;
+        String User = "root", Password = "derian2020";
+        String Url = String.format("jdbc:mysql://localhost:3306/Contact_App?user=%s&password=%s", User, Password);
         try {
-            if ((connection = DriverManager.getConnection(Url)) != null)
-                System.out.println("The connection to the database was successful");
-        } catch (SQLException exception) {
-            System.out.println("An error occurred while trying to connect to the database");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(Url);
+        } catch (SQLException | ClassNotFoundException exception) {
+            new Error().generatedError("An error occurred while trying to connect to the database");
             exception.printStackTrace();
         }
         return connection;

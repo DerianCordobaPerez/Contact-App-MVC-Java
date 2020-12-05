@@ -30,12 +30,16 @@ public class ControllerLogin implements ActionListener {
                 new Error().generatedError("All login fields are required");
             else {
                 IDataLogin loginDao = new LoginDaoImplement();
-                Models.User userLoggedIn;
-                if((userLoggedIn = loginDao.verifyUserLogin(userName, userPassword)) != null) {
-                    viewFormLogin.dispose();
-                    new UserDaoImplement().getModelData(userLoggedIn);
-                } else
-                    new Error().generatedError("The username or password is incorrect, please enter your data again");
+                Models.User userLoggedIn = loginDao.verifyUserLogin(userName, userPassword);
+                try {
+                    if(userLoggedIn != null) {
+                        new ControllerUser().viewUser(userLoggedIn);
+                        viewFormLogin.dispose();
+                    } else
+                        new Error().generatedError("The username or password is incorrect, please enter your data again");
+                } catch (NullPointerException exception) {
+                    new Error().generatedError("This user is null");
+                }
             }
         }
 

@@ -2,6 +2,7 @@ package DAO;
 import Connection.ConnectionDatabase;
 import Interfaces.IDataModel;
 import Models.User;
+import Views.Components.Error;
 import java.sql.*;
 
 public class UserDaoImplement implements IDataModel<User> {
@@ -22,7 +23,7 @@ public class UserDaoImplement implements IDataModel<User> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred when entering a new user");
+            new Error().generatedError("An error occurred when entering a new user");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -41,7 +42,7 @@ public class UserDaoImplement implements IDataModel<User> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to update user data");
+            new Error().generatedError("An error occurred while trying to update user data");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -59,7 +60,7 @@ public class UserDaoImplement implements IDataModel<User> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to delete user data");
+            new Error().generatedError("An error occurred while trying to delete user data");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -86,7 +87,7 @@ public class UserDaoImplement implements IDataModel<User> {
             resultQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to get user");
+            new Error().generatedError("An error occurred while trying to get user");
             exception.printStackTrace();
         }
         return newUser;

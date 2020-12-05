@@ -2,6 +2,8 @@ package DAO;
 import Interfaces.IDataModel;
 import Models.Contact;
 import Connection.ConnectionDatabase;
+import Views.Components.Error;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +29,7 @@ public class ContactDaoImplement implements IDataModel<Contact> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred when entering a new contact");
+            new Error().generatedError("An error occurred when entering a new contact");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -46,7 +48,7 @@ public class ContactDaoImplement implements IDataModel<Contact> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to update contact data");
+            new Error().generatedError("An error occurred while trying to update contact data");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -64,7 +66,7 @@ public class ContactDaoImplement implements IDataModel<Contact> {
             statementQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to update contact data");
+            new Error().generatedError("An error occurred while trying to delete contact data");
             exception.printStackTrace();
         }
         return correctBehavior;
@@ -90,7 +92,7 @@ public class ContactDaoImplement implements IDataModel<Contact> {
             resultQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to get contact");
+            new Error().generatedError("An error occurred while trying to get contact");
             exception.printStackTrace();
         }
         return newContact;
@@ -116,7 +118,7 @@ public class ContactDaoImplement implements IDataModel<Contact> {
             resultQuery.close();
             connection.close();
         } catch(SQLException exception) {
-            System.out.println("An error occurred while trying to get contacts");
+            new Error().generatedError("An error occurred while trying to get contacts");
             exception.printStackTrace();
         }
         return listContact;

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ViewContact {
     private JFrame mainWindow;
-
     /**
      * Main method which makes the calls to methods necessary for rendering the contact list
      * @param contactList list where contacts sent from controller are stored
