@@ -1,10 +1,9 @@
 package Controllers;
 import DAO.LoginDaoImplement;
+import DAO.UserDaoImplement;
 import Interfaces.IDataLogin;
 import Views.Components.Error;
 import Views.ViewFormLogin;
-import Views.ViewUser;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +33,7 @@ public class ControllerLogin implements ActionListener {
                 Models.User userLoggedIn;
                 if((userLoggedIn = loginDao.verifyUserLogin(userName, userPassword)) != null) {
                     viewFormLogin.dispose();
-                    new ViewUser().renderViewUser(userLoggedIn);
+                    new UserDaoImplement().getModelData(userLoggedIn);
                 } else
                     new Error().generatedError("The username or password is incorrect, please enter your data again");
             }
@@ -42,7 +41,7 @@ public class ControllerLogin implements ActionListener {
 
         if(event.equals(viewFormLogin.btnExit)) {
             if(JOptionPane.showConfirmDialog(null, "are you sure you want to leave",
-                    "Are you sure", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION) System.exit(0);
+                    "Are you sure", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) System.exit(0);
         }
     }
 }
