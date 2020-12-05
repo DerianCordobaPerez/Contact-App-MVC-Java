@@ -40,7 +40,7 @@ public class ControllerLogin implements ActionListener {
         }
 
         if(event.equals(viewFormLogin.btnExit)) {
-            if(JOptionPane.showConfirmDialog(null, "Are you sure you want to leave",
+            if(JOptionPane.showConfirmDialog(null, "are you sure you want to leave",
                     "Are you sure", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) System.exit(0);
         }
     }
