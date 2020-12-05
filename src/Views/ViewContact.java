@@ -30,11 +30,10 @@ public class ViewContact {
 
     private JPanel contactPanelConfiguration(List<Contact> contacts) {
         JPanel contactPanel = new JPanel();
-        JLabel lbContactPicture, lbName, lbPhone, lbOperator;
         for(Contact contact : contacts) {
-            lbContactPicture = new JLabel();
-            lbName = new JLabel("Name: " + contact.getName());
-            lbPhone = new JLabel("Phone: " + contact.getPhone());
+            JLabel lbContactPicture = new JLabel(),
+            lbName = new JLabel("Name: " + contact.getName()),
+            lbPhone = new JLabel("Phone: " + contact.getPhone()),
             lbOperator = new JLabel("Operator: " + contact.getOperator());
             JButton editButton = new JButton("Edit Contact"), deleteButton = new JButton("Delete Contact");
 
