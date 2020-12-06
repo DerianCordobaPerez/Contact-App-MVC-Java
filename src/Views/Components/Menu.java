@@ -3,9 +3,9 @@ import javax.swing.*;
 import java.util.Arrays;
 
 public class Menu extends JMenuBar {
-    public void generateMenu(JPanel mainPanel) {
+    public void generateMenu(JFrame mainWindow) {
         initComponents();
-        mainPanel.add(this);
+        mainWindow.setJMenuBar(this);
     }
 
     private void initComponents() {
@@ -15,7 +15,7 @@ public class Menu extends JMenuBar {
         itemContactAdd = new JMenuItem("Add Contact"),
         itemContactEdit = new JMenuItem("Edit Contact"),
         itemContactDelete = new JMenuItem("Delete Contact");
-        Arrays.asList(itemUserEdit, itemUserLogout).forEach(userAction::add);
+        Arrays.asList(itemUserEdit, new JSeparator(), itemUserLogout).forEach(userAction::add);
         Arrays.asList(itemContactAdd, itemContactEdit, itemContactDelete).forEach(contactAction::add);
         Arrays.asList(userAction, contactAction).forEach(this::add);
         this.setBounds(0, 0 , 500, 25);

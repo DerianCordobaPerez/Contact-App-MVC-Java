@@ -98,6 +98,27 @@ public class ContactDaoImplement implements IDataModel<Contact> {
         return newContact;
     }
 
+    @Override
+    public int getTotalClass() {
+        int totalQuantity = -1;
+        ResultSet resultQuery;
+        sqlQuery = "select count(id) as All from Contacts";
+        try {
+            connection = ConnectionDatabase.ConnectDatabase();
+            statementQuery = connection.createStatement();
+            resultQuery = statementQuery.executeQuery(sqlQuery);
+            if(resultQuery.next())
+                totalQuantity = (resultQuery.getInt("All")) + 1;
+            statementQuery.close();
+            resultQuery.close();
+            connection.close();
+        } catch(SQLException exception) {
+            new Error().generatedError("An error occurred while trying to get the total number of users");
+            exception.printStackTrace();
+        }
+        return totalQuantity;
+    }
+
     public List<Contact> getListModelData() {
         sqlQuery = "select * from contacts order by id desc";
         ResultSet resultQuery;

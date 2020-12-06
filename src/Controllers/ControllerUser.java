@@ -36,4 +36,9 @@ public class ControllerUser {
         }
         viewUser.renderViewUser(user);
     }
+
+    public int getAmount() {
+        IDataModel<User> userDao = new UserDaoImplement();
+        return userDao.getTotalClass();
+    }
 }

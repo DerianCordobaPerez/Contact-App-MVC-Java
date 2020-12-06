@@ -13,6 +13,7 @@ import java.util.Arrays;
  * @author derian_cordoba
  * */
 public class ViewUser extends JFrame {
+    public JButton btnViewAllContacts;
     /**
      * method commissioned to render and initialize the jframe window methods
      * @param user user to render
@@ -31,12 +32,12 @@ public class ViewUser extends JFrame {
      * @param user user to render
      * */
     private void initComponents(User user) {
-        JPanel mainPanel = mainPanelConfiguration(), centerPanel = new JPanel(), userPanel = userPanelConfiguration(user);
+        JPanel mainPanel = mainPanelConfiguration(), centerPanel = new JPanel(), userPanel = userPanelConfiguration(user), menuPanel = new JPanel();
         centerPanel.setOpaque(true);
         centerPanel.setBackground(Color.WHITE);
         centerPanel.setBorder(BorderFactory.createTitledBorder("User in Session -> " + user.getUserName()));
-        new Menu().generateMenu(mainPanel);
         centerPanel.add(userPanel);
+        new Menu().generateMenu(this);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         this.setContentPane(mainPanel);
     }
@@ -47,8 +48,9 @@ public class ViewUser extends JFrame {
      * */
     private JPanel userPanelConfiguration(User user) {
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new GridLayout(3, 2));
+        mainPanel.setLayout(new GridLayout(2, 2));
         mainPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10),  null));
+
         JLabel lbContactPicture = new JLabel(),
                 lbUserName = new JLabel("UserName: " + user.getUserName());
         ImageIcon userPicture = null;
@@ -60,7 +62,8 @@ public class ViewUser extends JFrame {
             new Error().generatedError("Error finding find photo of user " + user.getUserName());
         }
         lbContactPicture.setIcon(userPicture);
-        Arrays.asList(lbContactPicture, lbUserName).forEach(mainPanel::add);
+        btnViewAllContacts = new JButton("View All Contacts");
+        Arrays.asList(lbContactPicture, lbUserName, btnViewAllContacts).forEach(mainPanel::add);
         return mainPanel;
     }
 

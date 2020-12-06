@@ -10,10 +10,9 @@ import java.util.Arrays;
  * */
 
 public class ViewFormLogin extends JFrame {
-    public JButton btnEnter, btnExit;
+    public JButton btnEnter, btnExit, btnRegister;
     public JTextField tbUserName;
     public JPasswordField tbUserPassword;
-    public JLabel lbRegisterUser;
 
     public ViewFormLogin() {
         initComponents();
@@ -33,12 +32,12 @@ public class ViewFormLogin extends JFrame {
         JLabel lbUserName = new JLabel("Enter your Username "),
         lbUserPassword = new JLabel("Enter your Password "),
         lbRestorePassword = new JLabel("Forgot your password?");
-        lbRegisterUser = new JLabel("Register Account");
+        btnRegister = new JButton("Register Account");
         tbUserName = new JTextField(); tbUserPassword = new JPasswordField();
         btnEnter = new JButton("Enter"); btnExit = new JButton("Exit");
 
         Arrays.asList(lbUserName, tbUserName, lbUserPassword, tbUserPassword, btnEnter, btnExit).forEach(mainPanel::add);
-        Arrays.asList(lbRegisterUser, lbRestorePassword).forEach((components) -> mainPanel.add(components, BorderLayout.PAGE_END));
+        Arrays.asList(btnRegister, lbRestorePassword).forEach((components) -> mainPanel.add(components, BorderLayout.PAGE_END));
         this.setContentPane(mainPanel);
     }
 }

@@ -1,7 +1,7 @@
 package Controllers;
 import DAO.LoginDaoImplement;
-import DAO.UserDaoImplement;
 import Interfaces.IDataLogin;
+import Models.User;
 import Views.Components.Error;
 import Views.ViewFormLogin;
 import javax.swing.*;
@@ -14,6 +14,7 @@ public class ControllerLogin implements ActionListener {
     public void eventsGenerated() {
         viewFormLogin.btnEnter.addActionListener(this);
         viewFormLogin.btnExit.addActionListener(this);
+        viewFormLogin.btnRegister.addActionListener(this);
     }
 
     public ControllerLogin(ViewFormLogin viewFormLogin) {
@@ -46,6 +47,10 @@ public class ControllerLogin implements ActionListener {
         if(event.equals(viewFormLogin.btnExit)) {
             if(JOptionPane.showConfirmDialog(null, "Are you sure you want to leave",
                     "Are you sure", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) System.exit(0);
+        }
+
+        if(event.equals(viewFormLogin.btnRegister)) {
+
         }
     }
 }
