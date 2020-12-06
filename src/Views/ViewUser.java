@@ -1,14 +1,22 @@
 package Views;
 import Models.User;
 import Views.Components.Error;
+import Views.Components.Menu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Arrays;
 
+/**
+ * user view class
+ * @author derian_cordoba
+ * */
 public class ViewUser extends JFrame {
-
+    /**
+     * method commissioned to render and initialize the jframe window methods
+     * @param user user to render
+     * */
     public void renderViewUser(User user) {
         this.setTitle("Welcome " + user.getFirstName());
         this.setSize(500, 500);
@@ -18,16 +26,25 @@ public class ViewUser extends JFrame {
         SwingUtilities.invokeLater(() -> initComponents(user));
     }
 
+    /**
+     * method where we assign our main jpanel necessary methods for its visualization
+     * @param user user to render
+     * */
     private void initComponents(User user) {
         JPanel mainPanel = mainPanelConfiguration(), centerPanel = new JPanel(), userPanel = userPanelConfiguration(user);
         centerPanel.setOpaque(true);
         centerPanel.setBackground(Color.WHITE);
-        centerPanel.setBorder(BorderFactory.createTitledBorder("All Contacts"));
+        centerPanel.setBorder(BorderFactory.createTitledBorder("User in Session -> " + user.getUserName()));
+        new Menu().generateMenu(mainPanel);
         centerPanel.add(userPanel);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         this.setContentPane(mainPanel);
     }
 
+    /**
+     * method where we will paint the information of the logged in user
+     * @param user user to render
+     * */
     private JPanel userPanelConfiguration(User user) {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(3, 2));
@@ -38,10 +55,9 @@ public class ViewUser extends JFrame {
         try {
             userPicture = new ImageIcon(new ImageIcon(getClass().getResource("../Public/UsersPictures/"
                     + "UserName:" + user.getUserName() + "_" + "Id:" + user.getId() + ".jpg"))
-                    .getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                    .getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
         } catch(NullPointerException exception) {
-            userPicture = new ImageIcon(new ImageIcon(getClass().getResource("../Public/UsersPictures/Default.png"))
-                    .getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+            new Error().generatedError("Error finding find photo of user " + user.getUserName());
         }
         lbContactPicture.setIcon(userPicture);
         Arrays.asList(lbContactPicture, lbUserName).forEach(mainPanel::add);
