@@ -19,14 +19,14 @@ public class ViewContact {
         this.mainWindow.setLocationByPlatform(true);
         this.mainWindow.setVisible(true);
         this.mainWindow.setDefaultCloseOperation(this.mainWindow.EXIT_ON_CLOSE);
-        SwingUtilities.invokeLater(() -> contactLetter(contactList));
+        SwingUtilities.invokeLater(() -> initComponents(contactList));
     }
 
     /**
      * Method to fill the main frame of the contact window creating necessary Jpanels
      * @param contacts necessary to send it to a second function
      * */
-    private void contactLetter(List<Contact> contacts) {
+    private void initComponents(List<Contact> contacts) {
         JPanel mainPane = mainPanelConfiguration(), contactPanel = contactPanelConfiguration(contacts), centerPane = new JPanel();
         centerPane.setOpaque(true);
         centerPane.setBackground(Color.WHITE);

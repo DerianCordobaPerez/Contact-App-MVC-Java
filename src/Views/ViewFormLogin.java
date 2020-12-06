@@ -13,6 +13,7 @@ public class ViewFormLogin extends JFrame {
     public JButton btnEnter, btnExit;
     public JTextField tbUserName;
     public JPasswordField tbUserPassword;
+    public JLabel lbRegisterUser;
     private ControllerLogin controllerLogin;
 
     public ViewFormLogin() {
@@ -33,11 +34,12 @@ public class ViewFormLogin extends JFrame {
         JLabel lbUserName = new JLabel("Enter your Username "),
         lbUserPassword = new JLabel("Enter your Password "),
         lbRestorePassword = new JLabel("Forgot your password?");
+        lbRegisterUser = new JLabel("Register Account");
         tbUserName = new JTextField(); tbUserPassword = new JPasswordField();
         btnEnter = new JButton("Enter"); btnExit = new JButton("Exit");
 
         Arrays.asList(lbUserName, tbUserName, lbUserPassword, tbUserPassword, btnEnter, btnExit).forEach(mainPanel::add);
-        mainPanel.add(lbRestorePassword, BorderLayout.PAGE_END);
+        Arrays.asList(lbRegisterUser, lbRestorePassword).forEach((components) -> mainPanel.add(components, BorderLayout.PAGE_END));
         this.setContentPane(mainPanel);
     }
 }

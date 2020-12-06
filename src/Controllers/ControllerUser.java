@@ -6,7 +6,7 @@ import Views.ViewUser;
 import DAO.UserDaoImplement;
 
 public class ControllerUser {
-    private ViewUser viewUser;
+    private ViewUser viewUser = new ViewUser();
     public ControllerUser() {}
 
     public void recordModelDataUser(User user) {
@@ -34,6 +34,6 @@ public class ControllerUser {
             new Error().generatedError("The searched user has not been found in the database");
             return;
         }
-        viewUser = new ViewUser(user);
+        viewUser.renderViewUser(user);
     }
 }
