@@ -3,6 +3,7 @@ import Models.User;
 import Views.Components.Error;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Arrays;
 
@@ -18,20 +19,44 @@ public class ViewUser extends JFrame {
     }
 
     private void initComponents(User user) {
+        JPanel mainPanel = mainPanelConfiguration(), centerPanel = new JPanel(), userPanel = userPanelConfiguration(user);
+        centerPanel.setOpaque(true);
+        centerPanel.setBackground(Color.WHITE);
+        centerPanel.setBorder(BorderFactory.createTitledBorder("All Contacts"));
+        centerPanel.add(userPanel);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        this.setContentPane(mainPanel);
+    }
+
+    private JPanel userPanelConfiguration(User user) {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(3, 2));
+        mainPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10),  null));
         JLabel lbContactPicture = new JLabel(),
-        lbUserName = new JLabel("UserName: " + user.getUserName());
-        
+                lbUserName = new JLabel("UserName: " + user.getUserName());
+        ImageIcon userPicture = null;
         try {
-            ImageIcon userPicture = new ImageIcon(new ImageIcon(getClass().getResource("../Public/UsersPictures/"
-                    + "UserName:" + user.getUserName() + "_" + "Id:" + user.getId() + ".png"))
+            userPicture = new ImageIcon(new ImageIcon(getClass().getResource("../Public/UsersPictures/"
+                    + "UserName:" + user.getUserName() + "_" + "Id:" + user.getId() + ".jpg"))
                     .getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-            lbContactPicture.setIcon(userPicture);
         } catch(NullPointerException exception) {
-            new Error().generatedError("the image of the " + user.getUserName() + " user has not been found");
+            userPicture = new ImageIcon(new ImageIcon(getClass().getResource("../Public/UsersPictures/Default.png"))
+                    .getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         }
-
+        lbContactPicture.setIcon(userPicture);
         Arrays.asList(lbContactPicture, lbUserName).forEach(mainPanel::add);
+        return mainPanel;
+    }
+
+    /**
+     * generalized configuration for main JPanel
+     * */
+    private JPanel mainPanelConfiguration() {
+        JPanel contentPane = new JPanel();
+        contentPane.setOpaque(true);
+        contentPane.setBackground(Color.WHITE);
+        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BorderLayout(5, 5));
+        return contentPane;
     }
 }

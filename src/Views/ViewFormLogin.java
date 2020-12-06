@@ -14,7 +14,6 @@ public class ViewFormLogin extends JFrame {
     public JTextField tbUserName;
     public JPasswordField tbUserPassword;
     public JLabel lbRegisterUser;
-    private ControllerLogin controllerLogin;
 
     public ViewFormLogin() {
         initComponents();
@@ -23,7 +22,7 @@ public class ViewFormLogin extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setSize(500, 200);
-        controllerLogin = new ControllerLogin(this);
+        new ControllerLogin(this);
     }
 
     private void initComponents() {
