@@ -1,5 +1,7 @@
 package Views;
+
 import Controllers.ControllerLogin;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -13,7 +15,7 @@ public class ViewFormLogin extends JFrame {
     public JButton btnEnter, btnExit, btnRegister;
     public JTextField tbUserName;
     public JPasswordField tbUserPassword;
-
+    
     public ViewFormLogin() {
         initComponents();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -34,7 +36,7 @@ public class ViewFormLogin extends JFrame {
         lbRestorePassword = new JLabel("Forgot your password?");
         btnRegister = new JButton("Register Account");
         tbUserName = new JTextField(); tbUserPassword = new JPasswordField();
-        btnEnter = new JButton("Enter"); btnExit = new JButton("Exit");
+        btnEnter = new JButton("Enter"); btnExit = new JButton("Exit");;
 
         Arrays.asList(lbUserName, tbUserName, lbUserPassword, tbUserPassword, btnEnter, btnExit).forEach(mainPanel::add);
         Arrays.asList(btnRegister, lbRestorePassword).forEach((components) -> mainPanel.add(components, BorderLayout.PAGE_END));

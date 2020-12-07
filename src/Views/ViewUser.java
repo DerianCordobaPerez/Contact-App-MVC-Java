@@ -1,4 +1,5 @@
 package Views;
+import Controllers.ControllerLogin;
 import Models.User;
 import Views.Components.Error;
 import Views.Components.Menu;
@@ -78,4 +79,5 @@ public class ViewUser extends JFrame {
         contentPane.setLayout(new BorderLayout(5, 5));
         return contentPane;
     }
+
 }

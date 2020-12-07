@@ -1,9 +1,9 @@
 package Controllers;
 import DAO.LoginDaoImplement;
 import Interfaces.IDataLogin;
-import Models.User;
 import Views.Components.Error;
 import Views.ViewFormLogin;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
