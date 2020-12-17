@@ -2,8 +2,8 @@ package DAO;
 import Interfaces.IDataModel;
 import Models.Contact;
 import Connection.ConnectionDatabase;
+import Models.User;
 import Views.Components.Error;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +21,25 @@ public class ContactDaoImplement implements IDataModel<Contact> {
         boolean correctBehavior = false;
         sqlQuery = "insert into Contacts values(" + contact.getId() + ", '" + contact.getName() + "', '" + contact.getPhone() + "', '"
                 + contact.getOperator() + "')";
+        try {
+            connection = ConnectionDatabase.ConnectDatabase();
+            statementQuery = connection.createStatement();
+            statementQuery.execute(sqlQuery);
+            correctBehavior = true;
+            statementQuery.close();
+            connection.close();
+        } catch(SQLException exception) {
+            new Error().generatedError("An error occurred when entering a new contact");
+            exception.printStackTrace();
+        }
+        return correctBehavior;
+    }
+
+    @Override
+    public boolean recordModelData(User user, Contact contact) {
+        boolean correctBehavior = false;
+        sqlQuery = "insert into Contacts (id, contactName, numberPhone, operator, idUser) values(" + contact.getId() + ", '" + contact.getName() + "', '"
+                + contact.getPhone() + "', '" + contact.getOperator() + "', " + user.getId() + ")";
         try {
             connection = ConnectionDatabase.ConnectDatabase();
             statementQuery = connection.createStatement();
@@ -119,8 +138,9 @@ public class ContactDaoImplement implements IDataModel<Contact> {
         return totalQuantity;
     }
 
-    public List<Contact> getListModelData() {
-        sqlQuery = "select * from contacts order by id desc";
+    public List<Contact> getListModelData(User user) {
+        sqlQuery = "select * from contacts contact inner join users user on user.id = contact.id where user.id = " + user.getId() +
+                "group by contact.id order by contact.id desc";
         ResultSet resultQuery;
         List<Contact> listContact = new ArrayList<>();
         try {

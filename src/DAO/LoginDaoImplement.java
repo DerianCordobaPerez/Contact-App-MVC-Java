@@ -1,4 +1,5 @@
 package DAO;
+import Configuration.EncryptPassword;
 import Interfaces.IDataLogin;
 import Models.User;
 import Views.Components.Error;
@@ -14,7 +15,8 @@ public class LoginDaoImplement implements IDataLogin {
     private String sqlQuery = "";
     @Override
     public User verifyUserLogin(String userName, String userPassword) {
-        sqlQuery = "select * from Users where userName = '" + userName + "' and userPassword = '" + userPassword + "'";
+        sqlQuery = "select * from Users where userName = '" + userName + "' and userPassword = '" +
+                EncryptPassword.generateSecurePassword(userPassword, EncryptPassword.salt) + "'";
         ResultSet resultQuery;
         User userLoggedIn = null;
         try {
@@ -28,6 +30,7 @@ public class LoginDaoImplement implements IDataLogin {
                 userLoggedIn.setFirstName(resultQuery.getString(3));
                 userLoggedIn.setLastName(resultQuery.getString(4));
                 userLoggedIn.setUserName(resultQuery.getString(5));
+                userLoggedIn.setPassword(resultQuery.getString(6));
             }
             statementQuery.close();
             resultQuery.close();

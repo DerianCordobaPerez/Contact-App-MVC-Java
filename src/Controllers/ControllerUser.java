@@ -6,9 +6,18 @@ import Views.Components.Success;
 import Views.ViewUser;
 import DAO.UserDaoImplement;
 
-public class ControllerUser {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ControllerUser implements ActionListener {
     private ViewUser viewUser = new ViewUser();
-    public ControllerUser() {}
+    private User user;
+    public ControllerUser() {
+    }
+
+    private void eventsGenerated() {
+        viewUser.btnViewAllContacts.addActionListener(this);
+    }
 
     public void recordModelDataUser(User user) {
         IDataModel<User> userDao = new UserDaoImplement();
@@ -40,6 +49,7 @@ public class ControllerUser {
         if((user = userDao.getModelData(currentUser)) == null)
             new Error().generatedError("The searched user has not been found in the database");
         else {
+            this.user = user;
             new Success().generatedSuccess("Successful Login");
             viewUser.renderViewUser(user);
         }
@@ -48,5 +58,14 @@ public class ControllerUser {
     public int getAmount() {
         IDataModel<User> userDao = new UserDaoImplement();
         return userDao.getTotalClass();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        Object event = actionEvent.getSource();
+        if(event.equals(viewUser.btnViewAllContacts))
+            new ControllerContact().viewContacts(this.user);
+        else
+            new Error().generatedError("");
     }
 }

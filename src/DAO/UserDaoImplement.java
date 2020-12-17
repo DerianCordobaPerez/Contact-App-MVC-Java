@@ -13,8 +13,9 @@ public class UserDaoImplement implements IDataModel<User> {
     @Override
     public boolean recordModelData(User user) {
         boolean correctBehavior = false;
-        sqlQuery = "insert into Users values (" + user.getId() + ", '" + user.getIdentification() + "', '" + user.getFirstName() + "', '"
-                + user.getLastName() + "', '" + user.getUserName() + "')";
+        sqlQuery = "insert into Users (id, identification, firstname, lastname, username, userpassword) values (" + user.getId() + ", '" +
+                user.getIdentification() + "', '" + user.getFirstName() + "', '" + user.getLastName() + "', '" + user.getUserName() + "', '"
+                + user.getPassword() + "')";
         try {
             connection = ConnectionDatabase.ConnectDatabase();
             statementQuery = connection.createStatement();
@@ -97,13 +98,13 @@ public class UserDaoImplement implements IDataModel<User> {
     public int getTotalClass() {
         int totalQuantity = -1;
         ResultSet resultQuery;
-        sqlQuery = "select count(id) as All from Users";
+        sqlQuery = "select Count(*) as Total from Users";
         try {
             connection = ConnectionDatabase.ConnectDatabase();
             statementQuery = connection.createStatement();
             resultQuery = statementQuery.executeQuery(sqlQuery);
             if(resultQuery.next())
-                totalQuantity = (resultQuery.getInt("All")) + 1;
+                totalQuantity = (resultQuery.getInt("Total")) + 1;
             statementQuery.close();
             resultQuery.close();
             connection.close();

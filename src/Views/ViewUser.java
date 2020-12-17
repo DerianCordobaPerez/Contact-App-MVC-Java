@@ -25,7 +25,7 @@ public class ViewUser extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        SwingUtilities.invokeLater(() -> initComponents(user));
+        initComponents(user);
     }
 
     /**

@@ -1,6 +1,8 @@
 package Controllers;
 import Configuration.EncryptPassword;
+import Interfaces.IDataModel;
 import Models.User;
+import Views.Components.Error;
 import Views.ViewFormRegister;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +22,18 @@ public class ControllerRegister implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         Object event = actionEvent.getSource();
         if(event.equals(viewFormRegister.btnSave)) {
-            User newUser = newUserAssignament();
-            new ControllerUser().recordModelDataUser(newUser);
+            if(formFieldsValidation()) {
+                User newUser = newUserAssignament();
+                new ControllerUser().recordModelDataUser(newUser);
+            } else
+                new Error().generatedError("All the fields in the form are required, Please fill in all the fields");
         }
+    }
+
+    private boolean formFieldsValidation() {
+        return !viewFormRegister.tbFirstName.getText().isEmpty() || !viewFormRegister.tbLastName.getText().isEmpty() || !viewFormRegister.tbIdentification
+                .getText().isEmpty() || !viewFormRegister.tbUserPassword.getPassword().toString().isEmpty() || !viewFormRegister.tbUserName.getText()
+                .isEmpty();
     }
 
     private User newUserAssignament() {
@@ -32,8 +43,7 @@ public class ControllerRegister implements ActionListener {
         newUser.setFirstName(viewFormRegister.tbFirstName.getText());
         newUser.setLastName(viewFormRegister.tbLastName.getText());
         newUser.setUserName(viewFormRegister.tbUserName.getText());
-        newUser.setPassword(EncryptPassword.generateSecurePassword(new String(viewFormRegister.tbUserPassword.getPassword()),
-                EncryptPassword.getSalt(10)));
+        newUser.setPassword(EncryptPassword.generateSecurePassword(new String(viewFormRegister.tbUserPassword.getPassword()), EncryptPassword.salt));
         return newUser;
     }
 }

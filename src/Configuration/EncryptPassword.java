@@ -12,6 +12,7 @@ public class EncryptPassword {
     private static final Random randomNumber = new SecureRandom();
     private static final String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final int iterations = 10000, keyLength = 256;
+    public static String salt = "PBKDF2WithHmacSHA1";
 
     public static String getSalt(int length) {
         StringBuilder returnValue = new StringBuilder(length);
@@ -35,7 +36,8 @@ public class EncryptPassword {
 
     public static String generateSecurePassword(String password, String salt) {
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-        return Base64.getEncoder().encodeToString(securePassword);
+        String returnValue = Base64.getEncoder().encodeToString(securePassword);
+        return returnValue;
     }
 
     public static boolean verifyUserPassword(String providePassword, String securePassword, String salt) {

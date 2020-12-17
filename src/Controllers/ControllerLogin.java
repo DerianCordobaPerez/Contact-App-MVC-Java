@@ -3,6 +3,7 @@ import DAO.LoginDaoImplement;
 import Interfaces.IDataLogin;
 import Views.Components.Error;
 import Views.ViewFormLogin;
+import Views.ViewFormRegister;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -50,7 +51,7 @@ public class ControllerLogin implements ActionListener {
         }
 
         if(event.equals(viewFormLogin.btnRegister)) {
-
+            new ViewFormRegister();
         }
     }
 }
